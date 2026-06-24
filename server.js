@@ -44,6 +44,12 @@ app.use(authRouter); // ※ ログイン・ログアウトの処理（auth）も
 app.use(blogRouter);
 
 
+// ーーーーーーーーーーーーーーー
+// ルーティング
+// ーーーーーーーーーーーーーーー
+app.get('/', (req, res) => {
+    res.render('pages/index');
+});
 
 // 🎯 [POST] /contact : お問い合わせフォームの送信処理
 app.post('/contact', async (req, res) => {
@@ -78,6 +84,9 @@ app.post('/contact', async (req, res) => {
         res.status(500).send("エラーが発生しました。");
     }
 });
+
+
+
 
 // =========================================================================
 // 3. サーバー起動
