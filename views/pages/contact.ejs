@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<%- include('../partials/_head') %>
+<body>
+<%- include('../partials/_nav') %>
+
+<main class="container" style="max-width: 600px; margin: 40px auto; padding: 20px;">
+    <h2>📩 お問い合わせフォーム（テスト画面）</h2>
+
+    <% if (error) { %>
+        <div style="background-color: #ffcccc; color: #cc0000; padding: 10px; margin-bottom: 20px; border-radius: 4px;">
+            <%= error %>
+        </div>
+    <% } %>
+
+    <form action="/contact" method="POST" style="display: flex; flex-direction: column; gap: 15px;">
+        
+        <div>
+            <label style="display: block; margin-bottom: 5px;">お名前 (必須)</label>
+            <input type="text" name="name" required maxlength="50" style="width: 100%; padding: 8px;">
+        </div>
+
+        <div>
+            <label style="display: block; margin-bottom: 5px;">メールアドレス (必須)</label>
+            <input type="email" name="email" required style="width: 100%; padding: 8px;">
+        </div>
+
+        <div>
+            <label style="display: block; margin-bottom: 5px;">ご職業 (必須)</label>
+            <select name="job" required style="width: 100%; padding: 8px;">
+                <option value="">選択してください</option>
+                <option value="個人事業主">個人事業主</option>
+                <option value="法人（経営者）">法人（経営者）</option>
+                <option value="その他">その他</option>
+            </select>
+        </div>
+
+        <div>
+            <label style="display: block; margin-bottom: 5px;">ご予算 (必須)</label>
+            <select name="budget" required style="width: 100%; padding: 8px;">
+                <option value="">選択してください</option>
+                <option value="3万円〜5万円">3万円〜5万円</option>
+                <option value="5万円〜10万円">5万円〜10万円</option>
+                <option value="10万円以上">10万円以上</option>
+            </select>
+        </div>
+
+        <div>
+            <label style="display: block; margin-bottom: 5px;">ご相談内容 (必須)</label>
+            <textarea name="message" required maxlength="1000" rows="5" style="width: 100%; padding: 8px;"></textarea>
+        </div>
+
+        <button type="submit" style="background-color: #007bff; color: white; border: none; padding: 10px; cursor: pointer; font-size: 16px;">
+            送信する
+        </button>
+    </form>
+</main>
+
+<%- include('../partials/_footer') %>
+</body>
+</html>

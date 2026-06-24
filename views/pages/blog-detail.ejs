@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title><%= post.title %> - 公式サイト</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header style="background: #343a40; color: white; padding: 20px; text-align: center;">
+        <h1>🚀 TakehiroのTechブログ</h1>
+        <nav><a href="/blog" style="color: #ffc107; text-decoration: none; font-weight: bold;">⬅️ ブログ一覧へ戻る</a></nav>
+    </header>
+
+    <main style="max-width: 800px; margin: 40px auto; padding: 0 20px;">
+        <article style="background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+            <h1 style="border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 20px;">
+                <%= post.title %>
+            </h1>
+
+            <div style="font-size: 0.9rem; color: #6c757d; margin-bottom: 30px;">
+                📅 投稿日: <%= post.created_at %> 
+                <% if (post.tags) { %> 
+                    | 🏷️ タグ: <%= post.tags %>
+                <% } %>
+            </div>
+
+            <div style="white-space: pre-wrap; line-height: 1.8; color: #333; font-size: 1.05rem;">
+                <%= post.content %>
+            </div>
+        </article>
+
+        <div style="margin-top: 40px; text-align: center;">
+            <a href="/blog" style="padding: 10px 20px; background: #6c757d; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
+                ⬅️ 記事一覧に戻る
+            </a>
+        </div>
+    </main>
+</body>
+</html>

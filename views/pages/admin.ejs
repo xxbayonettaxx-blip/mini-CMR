@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<%- include('../partials/_head') %>
+<body>
+<%- include('../partials/_nav') %>
+
+<main class="container-fluid" style="padding: 20px;">
+    <h2>📥 お問い合わせ管理（CRMダッシュボード）</h2>
+    <p><a href="/logout" class="btn-secondary">ログアウト</a></p>
+
+    <table class="admin-table" border="1" style="width:100%; border-collapse:collapse; margin-top:20px;">
+        <thead>
+            <tr style="background-color: #f2f2f2; text-align: left;">
+                <th>ID</th>
+                <th>日時</th>
+                <th>お客様情報</th>
+                <th>ご相談内容</th>
+                <th>ステータス管理（Update）</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% contacts.forEach(contact => { %>
+                <tr>
+                    <td><%= contact.id %></td>
+                    <td><%= new Date(contact.created_at).toLocaleString('ja-JP') %></td>
+                    <td>
+                        <strong><%= contact.name %> 様</strong><br>
+                        <small><%= contact.email %></small><br>
+                        <span class="badge"><%= contact.job %></span> / <%= contact.budget %>
+                    </td>
+                    <td style="white-space: pre-wrap; max-width: 400px;"><%= contact.message %></td>
+                    <td>
+                        <form action="/admin/update-status/<%= contact.id %>" method="POST">
+                            <select name="status" onchange="this.form.submit()">
+                                <option value="未対応" <%= contact.status === '未対応' ? 'selected' : '' %>>🔴 未対応</option>
+                                <option value="対応中" <%= contact.status === '対応中' ? 'selected' : '' %>>🟡 対応中</option>
+                                <option value="完了" <%= contact.status === '完了' ? 'selected' : '' %>>🟢 完了</option>
+                            </select>
+                        </form>
+                        <form action="/admin/delete/<%= contact.id %>" method="POST" style="margin-top: 10px;" onsubmit="return confirm('本当に削除してもよろしいですか？')">
+    <button type="submit" style="background-color: #ff4d4d; color: white; border: none; padding: 3px 8px; cursor: pointer;">
+        🗑️ 削除
+    </button>
+</form>
+                    </td>
+                </tr>
+            <% }); %>
+            
+            <% if (contacts.length === 0) { %>
+                <tr>
+                    <td colspan="5" style="text-align: center; padding: 20px;">お問い合わせはまだ届いていません。</td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</main>
+
+<%- include('../partials/_footer') %>
+</body>
+</html>
